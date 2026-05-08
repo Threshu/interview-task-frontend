@@ -96,10 +96,14 @@ const store = createStore<State>({
 
     timesForStop(state): string[] {
       if (state.selectedLine === null || state.selectedStop === null) return []
-      return state.rawStops
+      const times = state.rawStops
         .filter(s => s.line === state.selectedLine && s.stop === state.selectedStop)
         .map(s => s.time)
-        .sort()
+      return [...new Set(times)].sort((a, b) => {
+        const [ah, am] = a.split(':').map(Number)
+        const [bh, bm] = b.split(':').map(Number)
+        return ah * 60 + am - (bh * 60 + bm)
+      })
     },
 
     allUniqueStops(state): string[] {
