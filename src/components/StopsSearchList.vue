@@ -69,6 +69,8 @@ function toggleSort() {
 
 <style scoped>
 .stops-card {
+  flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   border-radius: 4px;
@@ -115,7 +117,7 @@ function toggleSort() {
   top: 12px;
   font-size: 12px;
   line-height: 16px;
-  color: var(--color-text-muted);
+  color: #63666e;
   pointer-events: none;
   transition: top 0.15s, font-size 0.15s, padding 0.15s;
 }
@@ -141,6 +143,10 @@ function toggleSort() {
 }
 
 .stops-card__table {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
   background: #ffffff;
 }
 
@@ -176,6 +182,9 @@ function toggleSort() {
   list-style: none;
   margin: 0;
   padding: 0;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .stops-card__row {

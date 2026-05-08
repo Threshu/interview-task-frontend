@@ -11,7 +11,7 @@ defineProps<{ message: string }>()
 <style scoped>
 .empty-panel {
   flex: 1;
-  min-height: 444px;
+  min-height: 0;
   background-color: #ffffff;
   border: 2px dashed #9a9da4;
   border-radius: 4px;

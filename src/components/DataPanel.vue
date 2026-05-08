@@ -55,11 +55,11 @@ defineEmits<{
 <style scoped>
 .panel {
   flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
   border-radius: 4px;
-  min-height: 444px;
   overflow: hidden;
 }
 
@@ -76,6 +76,8 @@ defineEmits<{
 }
 
 .panel__body {
+  flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
 }
@@ -112,6 +114,9 @@ defineEmits<{
   list-style: none;
   margin: 0;
   padding: 0;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .panel__row {

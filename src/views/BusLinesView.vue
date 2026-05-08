@@ -1,12 +1,29 @@
 <template>
-  <div class="d-flex flex-column gap-3">
+  <div class="bus-lines">
     <LineList />
-    <div class="d-flex gap-3">
+    <div class="bus-lines__panels">
       <StopList />
       <TimeList />
     </div>
   </div>
 </template>
+
+<style scoped>
+.bus-lines {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bus-lines__panels {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  gap: 16px;
+}
+</style>
 
 <script setup lang="ts">
 import LineList from '@/components/LineList.vue'

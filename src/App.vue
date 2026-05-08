@@ -1,11 +1,13 @@
 <template>
   <div class="app-container">
     <h1 class="app-title">Timetable</h1>
-    <div class="d-flex flex-column gap-3">
+    <div class="app-inner">
       <AppNav />
-      <div v-if="loading" class="text-center py-5">Loading...</div>
-      <div v-else-if="error" class="alert alert-danger">{{ error }}</div>
-      <RouterView v-else />
+      <div class="app-view">
+        <div v-if="loading" class="text-center py-5">Loading...</div>
+        <div v-else-if="error" class="alert alert-danger">{{ error }}</div>
+        <RouterView v-else />
+      </div>
     </div>
   </div>
 </template>
@@ -26,10 +28,27 @@ onMounted(() => {
 
 <style scoped>
 .app-container {
+  height: 100vh;
   padding: 40px 32px;
   display: flex;
   flex-direction: column;
   gap: 24px;
+  overflow: hidden;
+}
+
+.app-inner {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.app-view {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .app-title {
