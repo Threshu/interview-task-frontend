@@ -23,7 +23,7 @@ import { computed } from 'vue'
 import { useStore } from '@/store'
 
 const store = useStore()
-const lines = computed<number[]>(() => store.getters.lines)
+const lines = computed(() => store.getters.lines)
 const selectedLine = computed(() => store.state.selectedLine)
 
 function selectLine(line: number) {

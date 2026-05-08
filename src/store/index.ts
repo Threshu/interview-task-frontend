@@ -3,12 +3,6 @@ import { InjectionKey } from 'vue'
 import type { RawStop, SortOrder } from '@/types'
 import { fetchStops } from '@/api/stops'
 
-export const key: InjectionKey<Store<State>> = Symbol()
-
-export function useStore() {
-  return baseUseStore<State>(key)
-}
-
 export interface State {
   rawStops: RawStop[]
   loading: boolean
@@ -16,6 +10,21 @@ export interface State {
   selectedLine: number | null
   selectedStop: string | null
   stopsSortOrder: SortOrder
+}
+
+export interface Getters {
+  lines: number[]
+  stopsForLine: RawStop[]
+  timesForStop: string[]
+  allUniqueStops: string[]
+}
+
+type AppStore = Omit<Store<State>, 'getters'> & { getters: Getters }
+
+export const key: InjectionKey<Store<State>> = Symbol()
+
+export function useStore(): AppStore {
+  return baseUseStore<State>(key) as AppStore
 }
 
 const store = createStore<State>({
