@@ -23,7 +23,7 @@
         <span class="stops-card__col-label">Bus Stops</span>
         <button
           type="button"
-          class="stops-card__sort-btn"
+          class="btn-icon"
           aria-label="Toggle sort order"
           @click="toggleSort"
         >
@@ -96,7 +96,7 @@ function toggleSort() {
   width: 100%;
   height: 100%;
   padding: 12px 40px 12px 16px;
-  border: 1px solid #e2e4ea;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   font-size: 12px;
   line-height: 16px;
@@ -117,7 +117,7 @@ function toggleSort() {
   top: 12px;
   font-size: 12px;
   line-height: 16px;
-  color: #63666e;
+  color: var(--color-text-light);
   pointer-events: none;
   transition: top 0.15s, font-size 0.15s, padding 0.15s;
 }
@@ -155,7 +155,7 @@ function toggleSort() {
   align-items: center;
   gap: 4px;
   padding: 24px 8px 23px 24px;
-  border-bottom: 1px solid #e2e4ea;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .stops-card__col-label {
@@ -166,17 +166,6 @@ function toggleSort() {
   color: var(--color-text-secondary);
 }
 
-.stops-card__sort-btn {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  width: 16px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .stops-card__list {
   list-style: none;
@@ -188,7 +177,7 @@ function toggleSort() {
 }
 
 .stops-card__row {
-  padding: 20px 24px 19px;
+  padding: 20px 0 19px 24px;
   font-size: 12px;
   font-weight: 400;
   line-height: 16px;

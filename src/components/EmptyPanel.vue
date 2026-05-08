@@ -13,7 +13,7 @@ defineProps<{ message: string }>()
   flex: 1;
   min-height: 0;
   background-color: #ffffff;
-  border: 2px dashed #9a9da4;
+  border: 2px dashed var(--color-text-muted);
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -24,7 +24,7 @@ defineProps<{ message: string }>()
   font-size: 14px;
   font-weight: 400;
   line-height: 24px;
-  color: #63666e;
+  color: var(--color-text-light);
   margin: 0;
   text-align: center;
 }

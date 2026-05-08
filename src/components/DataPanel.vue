@@ -9,7 +9,7 @@
         <button
           v-if="sortable"
           type="button"
-          class="panel__sort"
+          class="btn-icon"
           aria-label="Toggle sort order"
           @click="$emit('toggle-sort')"
         >
@@ -84,10 +84,10 @@ defineEmits<{
 
 .panel__column-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 4px;
   padding: 24px 8px 23px 24px;
-  border-bottom: 1px solid #e2e4ea;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .panel__column-label {
@@ -98,17 +98,6 @@ defineEmits<{
   color: var(--color-text-secondary);
 }
 
-.panel__sort {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  width: 16px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .panel__rows {
   list-style: none;
@@ -121,7 +110,7 @@ defineEmits<{
 
 .panel__row {
   height: 56px;
-  padding: 20px 24px 19px;
+  padding: 20px 0 19px 24px;
   font-size: 12px;
   line-height: 16px;
   color: var(--color-text-secondary);
