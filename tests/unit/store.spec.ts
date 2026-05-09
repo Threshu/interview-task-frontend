@@ -66,8 +66,7 @@ describe('getter: stopsForLine', () => {
       ],
       selectedLine: 100,
     })
-    expect(store.getters.stopsForLine).toHaveLength(1)
-    expect(store.getters.stopsForLine[0].stop).toBe('Alpha')
+    expect(store.getters.stopsForLine).toEqual(['Alpha'])
   })
 
   it('deduplicates stops (same stop, multiple times)', () => {
@@ -92,8 +91,7 @@ describe('getter: stopsForLine', () => {
       selectedLine: 100,
       stopsSortOrder: 'asc',
     })
-    const names = store.getters.stopsForLine.map((s: RawStop) => s.stop)
-    expect(names).toEqual(['A Stop', 'B Stop', 'C Stop'])
+    expect(store.getters.stopsForLine).toEqual(['A Stop', 'B Stop', 'C Stop'])
   })
 
   it('sorts by order descending when stopsSortOrder is desc', () => {
@@ -106,8 +104,7 @@ describe('getter: stopsForLine', () => {
       selectedLine: 100,
       stopsSortOrder: 'desc',
     })
-    const names = store.getters.stopsForLine.map((s: RawStop) => s.stop)
-    expect(names).toEqual(['C Stop', 'B Stop', 'A Stop'])
+    expect(store.getters.stopsForLine).toEqual(['C Stop', 'B Stop', 'A Stop'])
   })
 })
 

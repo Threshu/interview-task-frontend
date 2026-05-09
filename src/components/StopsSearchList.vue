@@ -18,28 +18,14 @@
       </div>
     </div>
 
-    <div class="stops-card__table">
-      <div class="stops-card__col-header">
-        <span class="stops-card__col-label">Bus Stops</span>
-        <button
-          type="button"
-          class="btn-icon"
-          aria-label="Toggle sort order"
-          @click="toggleSort"
-        >
-          <SortIcon :flipped="sortOrder === 'desc'" />
-        </button>
-      </div>
-
-      <ul class="stops-card__list">
-        <li
-          v-for="stop in filteredStops"
-          :key="stop"
-          class="stops-card__row"
-        >
-          {{ stop }}
-        </li>
-      </ul>
+    <div class="stops-card__body">
+      <SortableList
+        column-label="Bus Stops"
+        sortable
+        :items="filteredStops"
+        :sort-direction="sortOrder"
+        @toggle-sort="toggleSort"
+      />
     </div>
   </div>
 </template>
@@ -47,7 +33,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useStore } from '@/store'
-import SortIcon from '@/components/SortIcon.vue'
+import SortableList from '@/components/SortableList.vue'
 import type { SortOrder } from '@/types'
 
 const store = useStore()
@@ -73,17 +59,23 @@ function toggleSort() {
   min-height: 0;
   display: flex;
   flex-direction: column;
+  background: #ffffff;
   border-radius: 4px;
   overflow: hidden;
 }
 
 .stops-card__header {
   height: 56px;
-  background: #ffffff;
-  border-radius: 4px 4px 0 0;
   display: flex;
   align-items: center;
   padding: 8px 24px 8px 8px;
+}
+
+.stops-card__body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .search-field {
@@ -140,48 +132,5 @@ function toggleSort() {
   height: 16px;
   color: var(--color-text-muted);
   pointer-events: none;
-}
-
-.stops-card__table {
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  background: #ffffff;
-}
-
-.stops-card__col-header {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 24px 8px 23px 24px;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.stops-card__col-label {
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 16px;
-  letter-spacing: 0.001em;
-  color: var(--color-text-secondary);
-}
-
-
-.stops-card__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-}
-
-.stops-card__row {
-  padding: 20px 0 19px 24px;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
-  color: var(--color-text-secondary);
-  border-bottom: 1px solid var(--color-bg);
 }
 </style>

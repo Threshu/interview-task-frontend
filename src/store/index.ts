@@ -14,7 +14,7 @@ export interface State {
 
 export interface Getters {
   lines: number[]
-  stopsForLine: RawStop[]
+  stopsForLine: string[]
   timesForStop: string[]
   allUniqueStops: string[]
 }
@@ -81,34 +81,34 @@ const store = createStore<State>({
       return unique.sort((a, b) => a - b)
     },
 
-    stopsForLine(state): RawStop[] {
+    stopsForLine(state): string[] {
       if (state.selectedLine === null) return []
-      const seen = new Set<string>()
-      const unique = state.rawStops.filter(s => {
-        if (s.line !== state.selectedLine || seen.has(s.stop)) return false
-        seen.add(s.stop)
-        return true
-      })
-      return unique.sort((a, b) =>
-        state.stopsSortOrder === 'asc' ? a.order - b.order : b.order - a.order
-      )
+      const orderByStop = new Map<string, number>()
+      for (const s of state.rawStops) {
+        if (s.line !== state.selectedLine) continue
+        const prev = orderByStop.get(s.stop)
+        if (prev === undefined || s.order < prev) orderByStop.set(s.stop, s.order)
+      }
+      const entries = [...orderByStop.entries()]
+      entries.sort(([, a], [, b]) => state.stopsSortOrder === 'asc' ? a - b : b - a)
+      return entries.map(([stop]) => stop)
     },
 
     timesForStop(state): string[] {
       if (state.selectedLine === null || state.selectedStop === null) return []
+      const pad = (n: number) => n.toString().padStart(2, '0')
       const times = state.rawStops
         .filter(s => s.line === state.selectedLine && s.stop === state.selectedStop)
-        .map(s => s.time)
-      return [...new Set(times)].sort((a, b) => {
-        const [ah, am] = a.split(':').map(Number)
-        const [bh, bm] = b.split(':').map(Number)
-        return ah * 60 + am - (bh * 60 + bm)
-      })
+        .map(s => {
+          const [h, m] = s.time.split(':').map(Number)
+          return `${pad(h)}:${pad(m)}`
+        })
+      return [...new Set(times)].sort()
     },
 
     allUniqueStops(state): string[] {
       const unique = [...new Set(state.rawStops.map(s => s.stop))]
-      return unique.sort()
+      return unique.sort((a, b) => a.localeCompare(b))
     },
   },
 })

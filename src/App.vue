@@ -4,9 +4,9 @@
     <div class="app-inner">
       <AppNav />
       <div class="app-view">
-        <div v-if="loading" class="text-center py-5">Loading...</div>
-        <div v-else-if="error" class="alert alert-danger">{{ error }}</div>
-        <RouterView v-else />
+        <AsyncState :loading="loading" :error="error" @retry="loadStops">
+          <RouterView />
+        </AsyncState>
       </div>
     </div>
   </div>
@@ -16,14 +16,17 @@
 import { computed, onMounted } from 'vue'
 import { useStore } from '@/store'
 import AppNav from '@/components/AppNav.vue'
+import AsyncState from '@/components/AsyncState.vue'
 
 const store = useStore()
 const loading = computed(() => store.state.loading)
 const error = computed(() => store.state.error)
 
-onMounted(() => {
+function loadStops() {
   store.dispatch('loadStops')
-})
+}
+
+onMounted(loadStops)
 </script>
 
 <style scoped>
@@ -34,6 +37,15 @@ onMounted(() => {
   flex-direction: column;
   gap: 24px;
   overflow: hidden;
+}
+
+.app-title {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--color-text);
+  margin: 0;
+  padding: 4px 0;
 }
 
 .app-inner {
@@ -49,14 +61,5 @@ onMounted(() => {
   min-height: 0;
   display: flex;
   flex-direction: column;
-}
-
-.app-title {
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 32px;
-  color: var(--color-text);
-  margin: 0;
-  padding: 4px 0;
 }
 </style>

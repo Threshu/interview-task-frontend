@@ -6,7 +6,7 @@
     sortable
     clickable
     :title="`Bus Line: ${selectedLine}`"
-    :items="items"
+    :items="stops"
     :sort-direction="sortOrder"
     :selected-key="selectedStop"
     @toggle-sort="toggleSort"
@@ -25,9 +25,7 @@ const selectedLine = computed(() => store.state.selectedLine)
 const selectedStop = computed(() => store.state.selectedStop)
 const sortOrder = computed(() => store.state.stopsSortOrder)
 
-const items = computed<string[]>(() =>
-  store.getters.stopsForLine.map((s) => s.stop)
-)
+const stops = computed(() => store.getters.stopsForLine)
 
 function toggleSort() {
   store.commit('TOGGLE_STOPS_SORT')

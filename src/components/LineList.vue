@@ -10,6 +10,7 @@
         type="button"
         class="line-button"
         :class="{ 'line-button--active': line === selectedLine }"
+        :aria-pressed="line === selectedLine"
         @click="selectLine(line)"
       >
         {{ line }}
