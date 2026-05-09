@@ -161,6 +161,19 @@ describe('getter: timesForStop', () => {
     })
     expect(store.getters.timesForStop).toEqual(['09:00', '11:30', '14:00'])
   })
+
+  it('pads single-digit hours so lexicographic sort matches chronological', () => {
+    reset({
+      rawStops: [
+        stop(100, 'Alpha', 1, '14:00'),
+        stop(100, 'Alpha', 1, '9:29'),
+        stop(100, 'Alpha', 1, '12:38'),
+      ],
+      selectedLine: 100,
+      selectedStop: 'Alpha',
+    })
+    expect(store.getters.timesForStop).toEqual(['09:29', '12:38', '14:00'])
+  })
 })
 
 describe('getter: allUniqueStops', () => {
