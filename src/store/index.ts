@@ -67,7 +67,7 @@ const store = createStore<State>({
       try {
         const stops = await fetchStops()
         commit('SET_RAW_STOPS', stops)
-      } catch (e) {
+      } catch {
         commit('SET_ERROR', 'Failed to load stops. Please try again.')
       } finally {
         commit('SET_LOADING', false)

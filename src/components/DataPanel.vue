@@ -11,7 +11,7 @@
       :clickable="clickable"
       :selected-key="selectedKey"
       @toggle-sort="emit('toggle-sort')"
-      @item-click="onItemClick"
+      @item-click="(key: string) => emit('item-click', key)"
     />
   </section>
 </template>
@@ -34,10 +34,6 @@ const emit = defineEmits<{
   (e: 'toggle-sort'): void
   (e: 'item-click', key: string): void
 }>()
-
-function onItemClick(key: string) {
-  emit('item-click', key)
-}
 </script>
 
 <style scoped>

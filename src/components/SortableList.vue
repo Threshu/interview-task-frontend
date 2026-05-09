@@ -13,7 +13,7 @@
       </button>
     </div>
     <ul class="sortable-list__rows">
-      <li v-for="item in items" :key="item" class="sortable-list__row-wrap">
+      <li v-for="item in items" :key="item">
         <button
           v-if="clickable"
           type="button"
@@ -80,10 +80,6 @@ defineEmits<{
   flex: 1;
   min-height: 0;
   overflow-y: auto;
-}
-
-.sortable-list__row-wrap {
-  display: block;
 }
 
 .sortable-list__row {

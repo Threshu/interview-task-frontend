@@ -8,6 +8,12 @@
   </div>
 </template>
 
+<script setup lang="ts">
+import LineList from '@/components/LineList.vue'
+import StopList from '@/components/StopList.vue'
+import TimeList from '@/components/TimeList.vue'
+</script>
+
 <style scoped>
 .bus-lines {
   flex: 1;
@@ -24,9 +30,3 @@
   gap: 16px;
 }
 </style>
-
-<script setup lang="ts">
-import LineList from '@/components/LineList.vue'
-import StopList from '@/components/StopList.vue'
-import TimeList from '@/components/TimeList.vue'
-</script>
