@@ -133,4 +133,8 @@ function toggleSort() {
   color: var(--color-text-muted);
   pointer-events: none;
 }
+
+.search-field__input:not(:placeholder-shown) ~ .search-field__icon {
+  display: none;
+}
 </style>
