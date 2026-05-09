@@ -83,10 +83,15 @@ const store = createStore<State>({
 
     stopsForLine(state): string[] {
       if (state.selectedLine === null) return []
-      const sorted = state.rawStops
-        .filter(s => s.line === state.selectedLine)
-        .sort((a, b) => state.stopsSortOrder === 'asc' ? a.order - b.order : b.order - a.order)
-      return [...new Set(sorted.map(s => s.stop))]
+      const minOrder = new Map<string, number>()
+      for (const s of state.rawStops) {
+        if (s.line !== state.selectedLine) continue
+        const prev = minOrder.get(s.stop)
+        if (prev === undefined || s.order < prev) minOrder.set(s.stop, s.order)
+      }
+      return [...minOrder.entries()]
+        .sort(([, a], [, b]) => state.stopsSortOrder === 'asc' ? a - b : b - a)
+        .map(([stop]) => stop)
     },
 
     timesForStop(state): string[] {

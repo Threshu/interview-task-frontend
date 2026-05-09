@@ -106,6 +106,21 @@ describe('getter: stopsForLine', () => {
     })
     expect(store.getters.stopsForLine).toEqual(['C Stop', 'B Stop', 'A Stop'])
   })
+
+  it('uses min order when same stop appears with multiple orders (route loops)', () => {
+    const data: RawStop[] = [
+      stop(100, 'A', 1, '10:00'),
+      stop(100, 'Loop', 9, '10:00'),
+      stop(100, 'Loop', 5, '11:00'),
+      stop(100, 'B', 7, '10:00'),
+    ]
+    reset({ rawStops: data, selectedLine: 100, stopsSortOrder: 'asc' })
+    const asc = store.getters.stopsForLine
+    expect(asc).toEqual(['A', 'Loop', 'B'])
+    reset({ rawStops: data, selectedLine: 100, stopsSortOrder: 'desc' })
+    const desc = store.getters.stopsForLine
+    expect(desc).toEqual([...asc].reverse())
+  })
 })
 
 describe('getter: timesForStop', () => {
