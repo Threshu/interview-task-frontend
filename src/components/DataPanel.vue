@@ -10,8 +10,8 @@
       :sort-direction="sortDirection"
       :clickable="clickable"
       :selected-key="selectedKey"
-      @toggle-sort="emit('toggle-sort')"
-      @item-click="(key: string) => emit('item-click', key)"
+      @toggle-sort="$emit('toggle-sort')"
+      @item-click="$emit('item-click', $event)"
     />
   </section>
 </template>
@@ -30,7 +30,7 @@ defineProps<{
   selectedKey?: string | null
 }>()
 
-const emit = defineEmits<{
+defineEmits<{
   (e: 'toggle-sort'): void
   (e: 'item-click', key: string): void
 }>()

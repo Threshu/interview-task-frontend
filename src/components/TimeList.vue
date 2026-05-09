@@ -19,5 +19,5 @@ const store = useStore()
 const selectedLine = computed(() => store.state.selectedLine)
 const selectedStop = computed(() => store.state.selectedStop)
 
-const items = computed<string[]>(() => store.getters.timesForStop)
+const items = computed(() => store.getters.timesForStop)
 </script>
